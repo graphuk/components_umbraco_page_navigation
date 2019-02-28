@@ -1,0 +1,5 @@
+{
+	"name": "PageNavigation",
+	"destination": "App_Plugins",
+	"addToCsproj": true
+}

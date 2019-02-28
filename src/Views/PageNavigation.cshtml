@@ -1,0 +1,60 @@
+@using Graph.Components.PageNavigation
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<PageNavigationModel>
+
+@if (Model.PageSize < Model.ItemsAmount)
+{
+	<div class="pagination">
+		@if (Model.HasPrevPage)
+		{
+			<a href="@Model.PrevPageUrl" class="pagination__item">
+				<svg class="pagination__icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M16 9H2M9 16L2 9l7-7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</a>
+		}
+		else
+		{
+			<span class="pagination__item pagination__item_disabled">
+				<svg class="pagination__icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M16 9H2M9 16L2 9l7-7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</span>
+		}
+
+		@foreach (var pageId in Model.Pages)
+		{
+			if (pageId == Model.CurrentPage)
+			{
+				<span class="pagination__item pagination__item_active">@pageId</span>
+			}
+			else
+			{
+				if (pageId == 0)
+				{
+					<span class="pagination__dots">...</span>
+				}
+				else
+				{
+					<a class="pagination__item" href="@PageNavigationModel.UrlToPage(pageId)">@pageId</a>
+				}
+			}
+		}
+
+		@if (Model.HasNextPage)
+		{
+			<a href="@Model.NextPageUrl" class="pagination__item pagination__item_next">
+				<svg class="pagination__icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M2 9h14M9 16l7-7-7-7"  stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</a>
+		}
+		else
+		{
+			<span class="pagination__item pagination__item_disabled">
+				<svg class="pagination__icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M2 9h14M9 16l7-7-7-7"  stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</span>
+		}
+	</div>
+}
