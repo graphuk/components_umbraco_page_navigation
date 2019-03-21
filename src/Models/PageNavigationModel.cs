@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System;
 
 namespace Graph.Components.PageNavigation
 {
@@ -13,12 +14,15 @@ namespace Graph.Components.PageNavigation
 		public bool HasPrevPage { get; }
 		public IEnumerable<int> Pages { get; }
 
-		public PageNavigationModel(int currentPage, int pages, int itemsAmount, int pageSize = 0)
+		public PageNavigationModel(int currentPage, int itemsAmount, int pageSize = 0)
 		{
 			if (pageSize == 0)
 			{
 				pageSize = PageNavigationConfig.DefaultPageSize;
 			}
+			
+			var pages = (int)Math.Ceiling((decimal)itemsAmount / pageSize);
+
 			CurrentPage = currentPage;
 			ItemsAmount = itemsAmount;
 			PageSize = pageSize;
